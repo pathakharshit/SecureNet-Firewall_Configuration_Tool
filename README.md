@@ -31,5 +31,5 @@ SecureNet is a full-stack firewall configuration tool designed for enterprise ne
 
 ---
 
-## 📁 Project Structure
+
 
