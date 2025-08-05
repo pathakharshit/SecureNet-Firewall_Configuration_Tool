@@ -11,7 +11,6 @@ SecureNet is a full-stack firewall configuration tool designed for enterprise ne
 - 📡 **RESTful APIs** to handle all data operations
 - 🧱 **Create / Read / Update / Delete** firewall rules
 - 💾 **MySQL Database Integration**
-- 🧪 **Unit Testing** with JUnit
 - 📊 Real-time rule updates via frontend dashboard
 
 ---
@@ -24,8 +23,7 @@ SecureNet is a full-stack firewall configuration tool designed for enterprise ne
 | Backend   | Java, Spring Boot, Spring Security      |
 | Database  | MySQL                                   |
 | ORM       | Spring Data JPA                         |
-| Build Tool| Maven                                   |
-| Testing   | JUnit                                   |
+| Build Tool| Maven                                   |                                |
 | Auth      | Role-Based Access Control (RBAC)        |
 | API       | RESTful Services                        |
 
