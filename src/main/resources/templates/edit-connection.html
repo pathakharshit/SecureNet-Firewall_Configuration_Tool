@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Connection</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h2>Edit Connection</h2>
+    <form th:action="@{/edit-connection/{id}(id=${firewallRule.id})}" th:object="${firewallRule}" method="post">
+        <div class="form-group">
+            <label for="localIp">Local IP</label>
+            <input type="text" id="localIp" class="form-control" th:field="*{localIp}">
+        </div>
+        <div class="form-group">
+            <label for="localPort">Local Port</label>
+            <input type="number" id="localPort" class="form-control" th:field="*{localPort}">
+        </div>
+        <div class="form-group">
+            <label for="remoteIp">Remote IP</label>
+            <input type="text" id="remoteIp" class="form-control" th:field="*{remoteIp}">
+        </div>
+        <div class="form-group">
+            <label for="remotePort">Remote Port</label>
+            <input type="number" id="remotePort" class="form-control" th:field="*{remotePort}">
+        </div>
+        <div class="form-group">
+            <label for="protocol">Protocol</label>
+            <input type="text" id="protocol" class="form-control" th:field="*{protocol}">
+        </div>
+        <div class="form-group">
+            <label for="state">State</label>
+            <input type="text" id="state" class="form-control" th:field="*{state}">
+        </div>
+        <div class="form-group">
+            <label for="processName">Process Name</label>
+            <input type="text" id="processName" class="form-control" th:field="*{processName}">
+        </div>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a href="/home" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

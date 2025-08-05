@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- AdminLTE CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.1.0/css/adminlte.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.1.0/js/adminlte.min.js"></script>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kayıt Ol</title>
+    <!-- AdminLTE CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.1.0/css/adminlte.min.css">
+</head>
+<body class="hold-transition register-page">
+<div class="register-box">
+    <div class="register-logo">
+        <a href="#"><b>Kayıt</b> Ol</a>
+    </div>
+    <div class="card">
+        <div class="card-body register-card-body">
+            <form th:action="@{/register}" method="post">
+                <div class="input-group mb-3">
+                    <input type="text" id="username" name="username" class="form-control" placeholder="Kullanıcı Adı" required>
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="email" id="email" name="email" class="form-control" placeholder="E-posta" required>
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Şifre" required>
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="Şifreyi Onayla" required>
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <a th:href="@{/login}" class="btn btn-secondary">Giriş Yap</a>
+                    </div>
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary btn-block">Kayıt Ol</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

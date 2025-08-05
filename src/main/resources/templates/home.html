@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firewall</title>
+    <!-- AdminLTE CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.1.0/css/adminlte.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    <i class="fas fa-user"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a th:href="@{/change-password}" class="dropdown-item">
+                        <i class="fas fa-key mr-2"></i> Şifre Değiştir
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit" class="dropdown-item">
+                            <i class="fas fa-sign-out-alt mr-2"></i> Çıkış Yap
+                        </button>
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <a href="#" class="brand-link">
+            <span class="brand-text font-weight-light">Firewall</span>
+        </a>
+    </aside>
+
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="container-fluid">
+                <h3 class="mt-4">Aktif Ağ Bağlantıları</h3>
+                <table id="firewallTable" class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Port</th>
+                        <th>Protocol</th>
+                        <th>Action</th>
+                        <th>Incoming IP</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <footer class="main-footer">
+        <strong>© 2024 Şirket Adı. Tüm hakları saklıdır.</strong>
+    </footer>
+</div>
+
+<!-- JS Dependencies -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.1.0/js/adminlte.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+    var table = $('#firewallTable').DataTable({
+        "ajax": {
+            "url": "/getNetworkData",  // URL for the JSON data
+            "dataSrc": "data",
+            "beforeSend": function() {
+                $('#firewallTable').after('<div id="loading">Veri yükleniyor...</div>');
+            },
+            "complete": function() {
+                $('#loading').remove();
+            }
+        },
+        "columns": [
+            { "data": "id" },
+            { "data": "port" },
+            { "data": "protocol" },
+            { "data": "action" },
+            { "data": "ipFrom" },
+            {
+                "data": null, // Use null because this column does not come from the data source
+                "defaultContent": `
+                    <button class="btn btn-sm btn-primary edit-btn">Allow</button>
+                    <button class="btn btn-sm btn-danger delete-btn">Deny</button>`,
+                "orderable": false,
+                "searchable": false
+            }
+        ],
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+        "pageLength": 10,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Turkish.json"
+        }
+    });
+
+    // Handle click events for Edit and Delete buttons
+    $('#firewallTable tbody').on('click', '.edit-btn', function() {
+        var data = table.row($(this).parents('tr')).data();
+        var editUrl = `/edit-connection/${data.id}`;
+        window.location.href = editUrl; // Redirect to the edit page
+        // Implement the logic for editing here
+    });
+
+    $('#firewallTable tbody').on('click', '.delete-btn', function() {
+        var data = table.row($(this).parents('tr')).data();
+        if (confirm('Are you sure you want to delete the connection from ' + data.id + '?')) {
+            // Implement the delete functionality here
+            alert('Deleted connection from: ' + data.id);
+        }
+    });
+
+    // Refresh the table every 20 seconds
+    setInterval(function() {
+        table.ajax.reload(null, false);
+    }, 20000); // 20 seconds
+});
+
+
+</script>
+</body>
+</html>
